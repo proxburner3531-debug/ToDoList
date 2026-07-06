@@ -31,13 +31,13 @@ void RemoveTasks(std::string* tasks)
 			removeTask = std::stoi(inputString, &len);
 			if (len != inputString.length())
 			{
-				std::cout << "Pick a valid integar!\n";
+				std::cout << "Pick a valid integer!\n";
 				continue;
 			}
 		}
 		catch (...)
 		{
-			std::cout << "Pick a valid integar!\n";
+			std::cout << "Pick a valid integer!\n";
 			continue;
 		}
 		for (int i = 0;i < 100;i++)
@@ -45,6 +45,12 @@ void RemoveTasks(std::string* tasks)
 			if (removeTask == i + 1)
 			{
 				tasks[i] = "";
+
+				for (int j = i +1;j < 100;j++)
+				{
+					tasks[j - 1] = tasks[j];
+				}
+				break;
 			}
 		}
 		loop = false;
@@ -92,7 +98,7 @@ int main()
 
 			if (len != input.length())
 			{
-				std::cout << "Pick a valid integar from the above marked!\n";
+				std::cout << "Pick a valid integer from the above marked!\n";
 				continue;
 			}
 		}
