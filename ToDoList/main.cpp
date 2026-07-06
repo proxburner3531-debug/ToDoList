@@ -7,7 +7,6 @@ void AddTasks(std::string* tasks)
 	std::string assignTask;
 	std::cout << "Type in task you want to assign (like -> Homework) : ";
 	std::getline(std::cin >> std::ws, assignTask);
-
 	for (int i = 0;i < 100;i++) {
 		if (tasks[i] == "") 
 		{
@@ -20,36 +19,54 @@ void AddTasks(std::string* tasks)
 void RemoveTasks(std::string* tasks)
 {
 	int removeTask;
-	std::cout << "Type in the number in front of the task to delete it : ";
-	std::cin >> removeTask;
-
-	for (int i = 0;i < 100;i++) {
-		if (removeTask == i + 1) {
-			tasks[i] = "";
-			//for (int j = i;j < 100;j++) {
-			//	tasks[j] == tasks[j + 1];
-			//}
+	std::string inputString;
+	size_t len;
+	bool loop = true;
+	while (loop) 
+	{
+		std::cout << "Type in the number in front of the task to delete it : ";
+		std::getline(std::cin >> std::ws, inputString);
+		try
+		{
+			removeTask = std::stoi(inputString, &len);
+			if (len != inputString.length())
+			{
+				std::cout << "Pick a valid integar!\n";
+				continue;
+			}
 		}
+		catch (...)
+		{
+			std::cout << "Pick a valid integar!\n";
+			continue;
+		}
+		for (int i = 0;i < 100;i++)
+		{
+			if (removeTask == i + 1)
+			{
+				tasks[i] = "";
+			}
+		}
+		loop = false;
 	}
 }
 
 void ViewTasks(std::string* tasks)
 {
 	int taskCount = 0;
-	for (int i = 0;i < 100;i++) {
+	std::cout << "List\n";
+	for (int i = 0;i < 100;i++)
+	{
 		if (tasks[i] != "") 
 		{
 			taskCount++;
 			std::cout << taskCount << ". " << tasks[i] << "\n";
-			
 		}
 	}
-
 	if (taskCount == 0) 
 	{
 		std::cout << "No tasks assigned!\n";
 	}
-
 }
 
 int main()
@@ -69,7 +86,6 @@ int main()
 
 		std::cout << "Pick the number in front of option to select it : ";
 		std::getline(std::cin >> std::ws, input);
-
 		try
 		{
 			user = std::stoi(input, &len);
